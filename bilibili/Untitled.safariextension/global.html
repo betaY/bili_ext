@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<script>
+// Register for the validate and command events.
+safari.application.addEventListener("command", performCommand, false);
+safari.application.addEventListener("validate", validateCommand, false);
+
+function performCommand(event)
+{
+	if (event.command != "close-other-tabs")
+		return;
+
+	// return if there are no more tabs to close
+	if (event.target.browserWindow.tabs.length < 2)
+		return;
+
+	// Close others tab except the current one in the target's window.
+    var win = event.target.browserWindow;
+    var myTabs = win.tabs;
+    var bili_url = 'http://www.bilibili.com';
+    
+    for (var i = 0; i < myTabs.length; ++i) {
+        var tab = myTabs[i];
+        
+        if (tab.url == bili_url){
+            //do nothing for current tab
+            // var newTab;
+            // newTab = win.openTab().url = 'http://www.bilibili.com';
+            win.activeTab = tab;
+        }else{
+            // tab.close();
+        }
+        if (i == myTabs.length-1){
+            newTab = win.openTab().url = bili_url;
+        }
+    }
+}
+
+function validateCommand(event)
+{
+	if (event.command !== "close-other-tabs")
+		return;
+
+	// Disable the button if there are only 1 tab available.
+	event.target.disabled = event.target.browserWindow.tabs.length < 2;
+}
+</script>
