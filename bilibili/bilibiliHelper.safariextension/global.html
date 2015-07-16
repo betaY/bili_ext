@@ -11,38 +11,47 @@ function performCommand(event)
 		return;
 
 	// return if there are no more tabs to close
-	if (event.target.browserWindow.tabs.length < 2)
-		return;
+	// if (event.target.browserWindow.tabs.length < 2)
+	// 	return;
 
 	// Close others tab except the current one in the target's window.
     var win = event.target.browserWindow;
     var myTabs = win.tabs;
-    var bili_url = 'http://www.bilibili.com';
-    // if (myTab.length == 1) {
+    var bili_url = 'http://www.bilibili.com/';
+    // if (myTabs.length == 0) {
     // 	newTab = win.openTab().url = bili_url;
+    // 	// alert("Hello World!");
     // }
-    
+    // var url = win.activeTab.url;
+    // alert(safari.application.activeBrowserWindow.activeTab.url);
+    // alert(String(win.activeTab.url));
     for (var i = 0; i < myTabs.length; ++i) {
         var tab = myTabs[i];
-        
-        if (tab.url == bili_url){
+        // alert(tab.url+"\n"+bili_url+"\n");
+        // alert(tab.url.match(/www\.bilibili\.com/gi) == 'www.bilibili.com');
+        // safari.application.activeBrowserWindow.activeTab.url
+
+        // if (tab.url.localeCompare(bili_url) == 0){
+        if (tab.url.match(/www\.bilibili\.com/gi) == 'www.bilibili.com') {
             //do nothing for current tab
             // var newTab;
+            // alert("Enter")
             // newTab = win.openTab().url = 'http://www.bilibili.com';
-            win.activeTab = tab;
-        }else{
+            // win.activeTab = tab;
+            tab.activate();
+            // break;
+        }else if (i == myTabs.length-1){
+            newTab = win.openTab().url = bili_url;
+        } else {
             // tab.close();
             // newTab = win.openTab().url = bili_url;
-        }
-        if (i == myTabs.length-1){
-            newTab = win.openTab().url = bili_url;
         }
     }
 }
 
 function validateCommand(event)
 {
-	if (event.command !== "bilibili-helper")
+	if (event.command != "bilibili-helper")
 		return;
 
 	// Disable the button if there are only 1 tab available.
