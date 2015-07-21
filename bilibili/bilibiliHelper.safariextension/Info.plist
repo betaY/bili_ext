@@ -20,6 +20,24 @@
 	<dict>
 		<key>Global Page</key>
 		<string>global.html</string>
+		<key>Menus</key>
+		<array>
+			<dict>
+				<key>Identifier</key>
+				<string>helpMenu</string>
+				<key>Menu Items</key>
+				<array>
+					<dict>
+						<key>Command</key>
+						<string>goto-bilibili</string>
+						<key>Identifier</key>
+						<string>goto-bilibili</string>
+						<key>Title</key>
+						<string>Goto bilibili</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
 		<key>Toolbar Items</key>
 		<array>
 			<dict>
@@ -31,6 +49,8 @@
 				<string>icon-16.png</string>
 				<key>Label</key>
 				<string>bilibiliHelper</string>
+				<key>Menu</key>
+				<string>helpMenu</string>
 			</dict>
 		</array>
 	</dict>

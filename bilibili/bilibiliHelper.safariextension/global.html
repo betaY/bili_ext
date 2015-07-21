@@ -1,18 +1,15 @@
 <!DOCTYPE HTML>
 <script>
 // Register for the validate and command events.
-safari.application.addEventListener("command", performCommand, false);
-safari.application.addEventListener("validate", validateCommand, false);
+safari.application.addEventListener("command", performCommand, true);
+safari.application.addEventListener("validate", validateCommand, true);
+safari.application.addEventListener("menu", menuHandler, true);
 
 function performCommand(event)
 {
 	var newTab;
 	if (event.command != "bilibili-helper")
 		return;
-
-	// return if there are no more tabs to close
-	// if (event.target.browserWindow.tabs.length < 2)
-	// 	return;
 
 	// Close others tab except the current one in the target's window.
     var win = event.target.browserWindow;
@@ -27,6 +24,8 @@ function performCommand(event)
     // alert(String(win.activeTab.url));
     for (var i = 0; i < myTabs.length; ++i) {
         var tab = myTabs[i];
+        // newTab = win.openTab()
+         // newTab = win.openTab().url = bili_url;
         // alert(tab.url+"\n"+bili_url+"\n");
         // alert(tab.url.match(/www\.bilibili\.com/gi) == 'www.bilibili.com');
         // safari.application.activeBrowserWindoasdw.activeTab.url
@@ -51,10 +50,13 @@ function performCommand(event)
 
 function validateCommand(event)
 {
-	if (event.command != "bilibili-helper")
+	if (event.command !== "bilibili-helper")
 		return;
+}
 
-	// Disable the button if there are only 1 tab available.
-	// event.target.disabled = event.target.browserWindow.tabs.length < 2;
+function menuHandler(event) {
+    if (event.command !== "goto-bilibili") {
+        return;
+    }
 }
 </script>
